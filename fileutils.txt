@@ -1,0 +1,31 @@
+FileUtils.java —  класс  для получения пути к видеофайлу из Uri. Он работает по такому принципу:
+1.Метод getPath принимает Context и Uri, возвращая абсолютный путь к файлу в виде строки.
+2.Затем происходит обработка  Uri с типом content (например, файлы, выбранные через файловый менеджер).
+3.Потом происходит проверка является ли схема Uri типа content.Если да,  то класс запрашивает имя файла через ContentResolver с использованием OpenableColumns.DISPLAY_NAME*.
+(OpenableColumns.DISPLAY_NAME — константа интерфейса OpenableColumns в Android, которая возвращает понятное пользователю имя файла по запросу к открываемому URI. )
+4.После проверки создаётся объект File в папке кэша приложения (context.getCacheDir()) с полученным именем файла.
+5.Возвращается абсолютный путь к этому файлу.
+6.Если схема не content,  то класс возвращает путь, полученный напрямую из Uri (uri.getPath()).
+package com.example.converter;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
+import java.io.File;
+
+public class FileUtils {
+    public static String getPath(Context context, Uri uri) {
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+            String[] projection = { OpenableColumns.DISPLAY_NAME };
+            try (Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    String fileName = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
+                    File file = new File(context.getCacheDir(), fileName);
+                    return file.getAbsolutePath();
+                }
+            }
+        }
+        return uri.getPath();
+    }
+}
