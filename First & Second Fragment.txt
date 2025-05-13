@@ -1,0 +1,103 @@
+FirstFragment.java
+1.Класс FirstFragment наследуется от Fragment и представляет первый фрагмент в приложении, использующий навигацию Android Navigation Component.
+2.Создаётся приватное поле binding типа FragmentFirstBinding, которое используется для доступа к элементам интерфейса, определённым в файле разметки fragment_first.xml, через View Binding.
+3.Метод onCreateView отвечает за создание и возврат представления фрагмента. Он использует FragmentFirstBinding.inflate для связывания разметки с кодом и возвращает корневой View (binding.getRoot()).
+4.Метод onViewCreated вызывается после создания представления. Здесь на кнопку buttonFirst (определённую в разметке) добавляется слушатель событий, который при нажатии выполняет навигацию к SecondFragment через NavHostFragment.findNavController с использованием действия R.id.action_FirstFragment_to_SecondFragment (определённого в графе навигации).
+5.Метод onDestroyView очищает ссылку на binding (устанавливает null), чтобы избежать утечек памяти при уничтожении представления фрагмента.
+6.Фрагмент использует View Binding и Navigation Component для обеспечения безопасного доступа к UI-элементам и навигации между фрагментами.
+package com.example.converter;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.converter.databinding.FragmentFirstBinding;
+
+public class FirstFragment extends Fragment {
+
+    private FragmentFirstBinding binding;
+
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.buttonFirst.setOnClickListener(v ->
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment)
+        );
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+}
+
+SecondFragment.java
+1.Класс SecondFragment наследуется от Fragment и представляет второй фрагмент в приложении, также использующий Android Navigation Component.
+2.Создаётся приватное поле binding типа FragmentSecondBinding, которое связывает код с элементами интерфейса из файла разметки fragment_second.xml через View Binding.
+3.Метод onCreateView создаёт и возвращает представление фрагмента, используя FragmentSecondBinding.inflate для связывания разметки и возвращая корневой View (binding.getRoot()).
+4.Метод onViewCreated настраивает слушатель событий для кнопки buttonSecond. При нажатии кнопки выполняется навигация обратно к FirstFragment через NavHostFragment.findNavController с действием R.id.action_SecondFragment_to_FirstFragment (определённым в графе навигации).
+5.Метод onDestroyView сбрасывает binding в null, чтобы предотвратить утечки памяти при уничтожении представления фрагмента.
+6.Фрагмент также использует View Binding и Navigation Component, обеспечивая аналогичный подход к управлению UI и навигацией, как в FirstFragment.
+package com.example.converter;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.converter.databinding.FragmentSecondBinding;
+
+public class SecondFragment extends Fragment {
+
+    private FragmentSecondBinding binding;
+
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+
+        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.buttonSecond.setOnClickListener(v ->
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment)
+        );
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+}
