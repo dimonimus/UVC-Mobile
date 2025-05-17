@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background">
+
+    <Button
+        android:id="@+id/openButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Открыть файл"
+        android:backgroundTint="#FFA500"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Спиннер формата (уже с примененным стилем) -->
+    <Spinner
+        android:id="@+id/formatSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomSpinner"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Группа выбора видеокодека -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Видеокодек:"
+            android:layout_weight="0.3"
+            android:textColor="#ffffff"/>
+
+        <Spinner
+            android:id="@+id/videoCodecSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/CustomSpinner"
+            android:layout_weight="0.7"/>
+    </LinearLayout>
+
+    <!-- Группа выбора аудиокодека -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Аудиокодек:"
+            android:layout_weight="0.3"
+            android:textColor="#ffffff"/>
+
+        <Spinner
+            android:id="@+id/audioCodecSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/CustomSpinner"
+            android:layout_weight="0.7"/>
+    </LinearLayout>
+
+    <!-- Группа выбора битрейта -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Битрейт видео:"
+            android:layout_weight="0.3"
+            android:textColor="#ffffff"/>
+
+        <Spinner
+            android:id="@+id/bitrateSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/CustomSpinner"
+            android:layout_weight="0.7"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/convertButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Конвертировать"
+        android:backgroundTint="#FFA500"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Открыть видеоплеер"
+        android:backgroundTint="#FFA500"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите MP4 файл для конвертации"
+        android:scrollbars="vertical"
+        style="@style/CustomTextView"/>
+
+</LinearLayout>

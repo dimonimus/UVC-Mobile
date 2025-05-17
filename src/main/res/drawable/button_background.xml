@@ -1,0 +1,23 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Состояние при нажатии -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#FFA500"/> <!-- Цвет при наведении/нажатии -->
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    <!-- Состояние, когда кнопка неактивна -->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#808080"/> <!-- Серый для неактивной кнопки -->
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    <!-- Обычное состояние -->
+    <item>
+        <shape>
+            <solid android:color="#FF8C00"/> <!-- Основной цвет -->
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+</selector>
